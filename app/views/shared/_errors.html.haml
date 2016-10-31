@@ -2,6 +2,6 @@
   %h4
     = pluralize(target.errors.count, 'error')
     prohibited this record from being saved.
-  %ul
+  %ul#validation-errors
     - target.errors.full_messages.each do |message|
       %li= message

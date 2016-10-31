@@ -25,6 +25,7 @@ gem 'pry-rails'
 gem 'responders'
 gem 'sprockets', '>= 3.0.0'
 gem 'sprockets-es6'
+gem 'foundation-rails'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

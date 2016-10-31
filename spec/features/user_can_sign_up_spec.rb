@@ -1,0 +1,54 @@
+require 'rails_helper'
+
+describe 'User can sign up', type: :feature do
+  scenario 'they see the create account button when not signed in' do
+    visit root_path
+
+    expect(page).to have_link('Create Account')
+  end
+
+  scenario 'they click the "Create Account" link and are taken to form page' do
+    visit root_path
+
+    click_link 'Create Account'
+
+    expect(current_path).to eq('/users/new')
+    expect(page).to have_selector('input')
+  end
+
+  scenario 'they fill in form and user is created' do
+    visit new_user_path
+
+    fill_in 'user[email_address]', with: 'bob@gmail.com'
+    fill_in 'user[password]', with: 'password'
+    fill_in 'user[password_confirmation]', with: 'password'
+
+    expect{
+      click_button 'Create account'
+    }.to change{User.count}.from(0).to(1)
+  end
+
+  context 'passwords do not match' do
+    scenario 'they receive an error message' do
+      visit new_user_path
+
+      fill_in 'user[email_address]', with: 'bob@gmail.com'
+      fill_in 'user[password]', with: 'password'
+      fill_in 'user[password_confirmation]', with: 'sandwich'
+      click_button 'Create account'
+
+      expect(page).to have_text('Passwords do not match')
+    end
+
+    scenario 'the user does not get created' do
+      visit new_user_path
+
+      fill_in 'user[email_address]', with: 'bob@gmail.com'
+      fill_in 'user[password]', with: 'password'
+      fill_in 'user[password_confirmation]', with: 'sandwich'
+        click_button 'Create account'
+
+      expect(User.count).to eq(0)
+    end
+  end
+end

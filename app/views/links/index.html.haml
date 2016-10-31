@@ -1,4 +1,4 @@
-= form_for :link, url: link_path do |f|
+= form_for @link do |f|
   - if @link
     = render partial: '/shared/errors', locals: { target: @link }
   = f.label :url

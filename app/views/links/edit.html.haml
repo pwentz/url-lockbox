@@ -1,0 +1,9 @@
+= form_for @link do |f|
+  = render partial: '/shared/errors', locals: { target: @link }
+  = f.label :url
+  = f.text_field :url
+  %br
+  = f.label :title
+  = f.text_field :title
+  %br
+  = f.submit 'Update link', class: 'update-link'

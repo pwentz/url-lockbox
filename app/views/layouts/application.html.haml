@@ -12,6 +12,10 @@
     = csrf_meta_tag
 
   %body
+    %ul.menu.primary-nav
+      - if current_user
+        %li= link_to 'Sign out', '/sign_out', method: :delete
+
     - flash.each do |type, message|
       = content_tag :div, message, class: "flash_#{type}"
 

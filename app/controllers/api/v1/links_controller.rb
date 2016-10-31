@@ -11,4 +11,9 @@ class Api::V1::LinksController < ApplicationController
       respond_with 'Authentication required', status: 400
     end
   end
+
+  def update
+    link = Link.find(params[:id])
+    link.update_attribute(:read, params[:read])
+  end
 end

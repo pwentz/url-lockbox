@@ -11,7 +11,6 @@ class LinksController < ApplicationController
       current_user.links << @link
     end
 
-    @links = current_user.links
     render :index
   end
 

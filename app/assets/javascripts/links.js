@@ -1,3 +1,4 @@
 $(document).ready(() => {
-  new LinksContainer().renderLinks()
+  const links = new LinksContainer()
+  links.getLinks()
 })

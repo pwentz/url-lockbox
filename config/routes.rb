@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create]
 
   resources :links, only: [:index]
+  post '/links', to: 'links#create', as: 'link'
 
   get '/sign_in', to: 'sessions#new', as: 'new_session'
   post '/sign_in', to: 'sessions#create', as: 'session'

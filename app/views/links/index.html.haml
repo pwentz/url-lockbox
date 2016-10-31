@@ -1,0 +1,16 @@
+= form_for :link, url: link_path do |f|
+  - if @link
+    = render partial: '/shared/errors', locals: { target: @link }
+  = f.label :url
+  = f.text_field :url
+  %br
+  = f.label :title
+  = f.text_field :title
+  %br
+  = f.submit 'Create link'
+
+
+%div.links
+  - unless current_user.links.empty?
+    - @links.each do |link|
+      = link_to link.title, link.url

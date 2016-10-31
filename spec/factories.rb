@@ -3,4 +3,9 @@ FactoryGirl.define do
     email_address 'bob@gmail.com'
     password 'password'
   end
+
+  factory :link do
+    url 'https://github.com'
+    title 'Github'
+  end
 end

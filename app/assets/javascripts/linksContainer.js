@@ -4,9 +4,13 @@ class LinksContainer {
     this.getLinks = this.getLinks.bind(this)
     this.markAsRead = this.markAsRead.bind(this)
     this.filterLinks = this.filterLinks.bind(this)
+    this.filterRead = this.filterRead.bind(this)
+    this.filterUnread = this.filterUnread.bind(this)
 
     $(document).on('click', '.mark-read', this.markAsRead)
     $(document).on('keyup', '.link-search', this.filterLinks)
+    $(document).on('click', '#filter-read', this.filterRead)
+    $(document).on('click', '#filter-unread', this.filterUnread)
   }
 
   getLinks() {
@@ -64,6 +68,32 @@ class LinksContainer {
       }
       else {
         $link.hide()
+      }
+    })
+  }
+
+  filterRead(e) {
+    $('.link').each((index, link) => {
+      let $linkDiv = $(link)
+      let linkP = $linkDiv.find('p')
+      if (linkP[0].innerText === 'Read: true') {
+        $linkDiv.show()
+      }
+      else {
+        $linkDiv.hide()
+      }
+    })
+  }
+
+  filterUnread(e) {
+    $('.link').each((index, link) => {
+      let $linkDiv = $(link)
+      let linkP = $linkDiv.find('p')
+      if (linkP[0].innerText === 'Read: true') {
+        $linkDiv.hide()
+      }
+      else {
+        $linkDiv.show()
       }
     })
   }

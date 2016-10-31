@@ -7,6 +7,7 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/rspec'
+require 'rack_session_access/capybara'
 require 'database_cleaner'
 # Add additional requires below this line. Rails is not loaded until this point!
 

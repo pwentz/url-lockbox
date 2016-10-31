@@ -25,10 +25,12 @@ gem 'pry-rails'
 gem 'responders'
 gem 'sprockets', '>= 3.0.0'
 gem 'sprockets-es6'
+gem 'foundation-rails'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
+gem 'rack_session_access', group: :test
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

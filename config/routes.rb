@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   get '/', to: 'root#index', as: 'root'
 
   resources :users, only: [:new, :create]
+
+  resources :links, only: [:index]
 end

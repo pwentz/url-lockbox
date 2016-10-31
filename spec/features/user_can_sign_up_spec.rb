@@ -28,6 +28,30 @@ describe 'User can sign up', type: :feature do
     }.to change{User.count}.from(0).to(1)
   end
 
+  scenario 'the session gets set with their user_id' do
+    visit new_user_path
+
+    fill_in 'user[email_address]', with: 'bob@gmail.com'
+    fill_in 'user[password]', with: 'password'
+    fill_in 'user[password_confirmation]', with: 'password'
+    click_button 'Create account'
+
+    expect(
+      page.get_rack_session['user_id']
+    ).to eq(1)
+  end
+
+  scenario 'the user gets taken to the links index page' do
+    visit new_user_path
+
+    fill_in 'user[email_address]', with: 'bob@gmail.com'
+    fill_in 'user[password]', with: 'password'
+    fill_in 'user[password_confirmation]', with: 'password'
+    click_button 'Create account'
+
+    expect(current_path).to eq('/links')
+  end
+
   context 'passwords do not match' do
     scenario 'they receive an error message' do
       visit new_user_path
@@ -46,9 +70,62 @@ describe 'User can sign up', type: :feature do
       fill_in 'user[email_address]', with: 'bob@gmail.com'
       fill_in 'user[password]', with: 'password'
       fill_in 'user[password_confirmation]', with: 'sandwich'
-        click_button 'Create account'
+      click_button 'Create account'
 
       expect(User.count).to eq(0)
+    end
+
+    scenario 'no session gets created' do
+      visit new_user_path
+
+      fill_in 'user[email_address]', with: 'bob@gmail.com'
+      fill_in 'user[password]', with: 'password'
+      fill_in 'user[password_confirmation]', with: 'sandwich'
+      click_button 'Create account'
+
+      expect(
+        page.get_rack_session['user_id']
+      ).to eq(nil)
+    end
+  end
+
+  context 'email address has already been taken' do
+    scenario 'they receive an error message' do
+      existing_user = FactoryGirl.create(:user)
+      visit new_user_path
+
+      fill_in 'user[email_address]', with: 'bob@gmail.com'
+      fill_in 'user[password]', with: 'password'
+      fill_in 'user[password_confirmation]', with: 'password'
+      click_button 'Create account'
+
+      expect(page).to have_text('Email address has already been taken')
+    end
+
+    scenario 'the user does not get created' do
+      existing_user = FactoryGirl.create(:user)
+      visit new_user_path
+
+      fill_in 'user[email_address]', with: 'bob@gmail.com'
+      fill_in 'user[password]', with: 'password'
+      fill_in 'user[password_confirmation]', with: 'password'
+      click_button 'Create account'
+
+      expect(User.count).to eq(1)
+    end
+
+    scenario 'no session gets stored' do
+      existing_user = FactoryGirl.create(:user)
+      visit new_user_path
+
+      fill_in 'user[email_address]', with: 'bob@gmail.com'
+      fill_in 'user[password]', with: 'password'
+      fill_in 'user[password_confirmation]', with: 'password'
+      click_button 'Create account'
+
+      expect(
+        page.get_rack_session['user_id']
+      ).to eq(nil)
     end
   end
 end

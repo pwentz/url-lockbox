@@ -3,8 +3,10 @@ class LinksContainer {
     this.links = []
     this.getLinks = this.getLinks.bind(this)
     this.markAsRead = this.markAsRead.bind(this)
+    this.filterLinks = this.filterLinks.bind(this)
 
     $(document).on('click', '.mark-read', this.markAsRead)
+    $(document).on('keyup', '.link-search', this.filterLinks)
   }
 
   getLinks() {
@@ -16,14 +18,14 @@ class LinksContainer {
     console.log(data)
     return data.map(link => {
       if (link.read) {
-        return `<div id=${link.id}>
+        return `<div id=${link.id} class='link'>
                  <a href=${link.url} style='color:red;' class='link-title'>${link.title}</a><p>Read: ${link.read}</p>
                  <a href='#' class='mark-read'>Mark as Unread</a>
                  <a href='/links/${link.id}/edit'class='edit-link button warning'>Edit</button>
                 </div>`
       }
       else {
-        return `<div id=${link.id}>
+        return `<div id=${link.id} class='link'>
                  <a href=${link.url} class='link-title'>${link.title}</a><p>Read: ${link.read}</p>
                  <a href='#' class='mark-read'>Mark as Read</a>
                  <a href='links/${link.id}/edit' class='edit-link button warning'>Edit</button>
@@ -49,6 +51,21 @@ class LinksContainer {
       $(linkTitle).css('color', '#2199e8')
       this.updateReadStatus(targetDiv.id, 'false')
     }
+  }
+
+  filterLinks(e) {
+    let searchParams = e.target.value.toLowerCase()
+
+    $('.link').each((index, link) => {
+      let $link = $(link)
+      let linkTitle = $link.find('.link-title')[0].innerText
+      if (linkTitle.includes(searchParams)) {
+        $link.show()
+      }
+      else {
+        $link.hide()
+      }
+    })
   }
 
   updateReadStatus(id, readStatus) {

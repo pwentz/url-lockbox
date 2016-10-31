@@ -3,10 +3,10 @@ class Api::V1::LinksController < ApplicationController
   respond_to :json
 
   def index
-    if current_user
-      links = current_user.links
-
-      respond_with links
+    if current_user && params[:ordered]
+      respond_with current_user.links.order(:title)
+    elsif current_user
+      respond_with current_user.links
     else
       respond_with 'Authentication required', status: 400
     end

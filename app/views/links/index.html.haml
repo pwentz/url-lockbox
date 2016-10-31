@@ -11,6 +11,3 @@
 
 
 %div.links
-  - unless current_user.links.empty?
-    - @links.each do |link|
-      = link_to link.title, link.url

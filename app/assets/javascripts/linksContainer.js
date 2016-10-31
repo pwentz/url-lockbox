@@ -6,11 +6,13 @@ class LinksContainer {
     this.filterLinks = this.filterLinks.bind(this)
     this.filterRead = this.filterRead.bind(this)
     this.filterUnread = this.filterUnread.bind(this)
+    this.filterABC = this.filterABC.bind(this)
 
     $(document).on('click', '.mark-read', this.markAsRead)
     $(document).on('keyup', '.link-search', this.filterLinks)
     $(document).on('click', '#filter-read', this.filterRead)
     $(document).on('click', '#filter-unread', this.filterUnread)
+    $(document).on('click', '#filter-abc', this.filterABC)
   }
 
   getLinks() {
@@ -62,12 +64,12 @@ class LinksContainer {
 
     $('.link').each((index, link) => {
       let $link = $(link)
-      let linkTitle = $link.find('.link-title')[0].innerText
-      if (linkTitle.includes(searchParams)) {
-        $link.show()
+      let linkTitle = $link.find('.link-title')[0].innerText.toLowerCase()
+      if (linkTitle.indexOf(searchParams) === -1) {
+        $link.hide()
       }
       else {
-        $link.hide()
+        $link.show()
       }
     })
   }
@@ -96,6 +98,14 @@ class LinksContainer {
         $linkDiv.show()
       }
     })
+  }
+
+  filterABC(e) {
+    $.getJSON('/api/v1/links.json?ordered=true')
+      .done( data => {
+        $('.links').empty()
+        $('.links').append(this.renderLinks(data))
+      })
   }
 
   updateReadStatus(id, readStatus) {

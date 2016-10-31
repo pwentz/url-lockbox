@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_action :verify_permissions
+
   def new
 
   end

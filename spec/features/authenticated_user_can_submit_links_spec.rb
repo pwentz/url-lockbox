@@ -83,6 +83,16 @@ describe 'Authenticated user can submit links', type: :feature do
   end
 
   context 'user is not authenticated' do
+    scenario 'they see a descriptive message' do
+      visit links_path
 
+      expect(page).to have_text('You are not authorized to visit this page')
+    end
+
+    scenario 'they see no links' do
+      visit links_path
+
+      expect(page).not_to have_css('.links')
+    end
   end
 end

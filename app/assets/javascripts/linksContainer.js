@@ -19,12 +19,14 @@ class LinksContainer {
         return `<div id=${link.id}>
                  <a href=${link.url} style='color:red;' class='link-title'>${link.title}</a><p>Read: ${link.read}</p>
                  <a href='#' class='mark-read'>Mark as Unread</a>
+                 <a href='/links/${link.id}/edit'class='edit-link button warning'>Edit</button>
                 </div>`
       }
       else {
         return `<div id=${link.id}>
                  <a href=${link.url} class='link-title'>${link.title}</a><p>Read: ${link.read}</p>
                  <a href='#' class='mark-read'>Mark as Read</a>
+                 <a href='links/${link.id}/edit' class='edit-link button warning'>Edit</button>
                 </div>`
       }
     })

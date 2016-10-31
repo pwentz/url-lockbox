@@ -79,7 +79,7 @@ describe 'Authenticated user can submit links', type: :feature do
         click_button 'Create link'
 
         within('#validation-errors') do
-          expect(page).to have_text('URL must be valid')
+          expect(page).to have_text('Url is not a valid URL')
         end
       end
     end

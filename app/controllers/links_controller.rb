@@ -1,6 +1,7 @@
 class LinksController < ApplicationController
   def index
     @links = current_user.links
+    @link = Link.new unless @link
   end
 
   def create
@@ -12,6 +13,19 @@ class LinksController < ApplicationController
     end
 
     render :index
+  end
+
+  def edit
+    @link = Link.find(params[:id])
+  end
+
+  def update
+    @link = Link.find(params[:id])
+    if @link.update(link_params)
+      redirect_to links_path
+    else
+      render :edit
+    end
   end
 
   private

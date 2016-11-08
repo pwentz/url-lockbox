@@ -30,14 +30,18 @@ class LinksContainer {
         return `<div id=${link.id} class='link'>
                  <a href=${link.url} style='color:red;' class='link-title' target='_blank'>${link.title}</a><p>Read: ${link.read}</p>
                  <a href='#' class='mark-read'>Mark as Unread</a>
-                 <a href='/links/${link.id}/edit' class='edit-link button warning'>Edit</button>
+                 <a href='/links/${link.id}/edit' class='edit-link button warning'>Edit</a>
+                 <p>This is a short story about <strong>${link.html_title}</strong>, starting with <strong>${link.html_h1}</strong></p>
+                 <hr>
                 </div>`
       }
       else {
         return `<div id=${link.id} class='link'>
                  <a href=${link.url} class='link-title' target='_blank'>${link.title}</a><p>Read: ${link.read}</p>
                  <a href='#' class='mark-read'>Mark as Read</a>
-                 <a href='links/${link.id}/edit' class='edit-link button warning'>Edit</button>
+                 <a href='links/${link.id}/edit' class='edit-link button warning'>Edit</a>
+                 <p>This is a short story about <strong>${link.html_title}</strong>, starting with <strong>${link.html_h1}</strong></p>
+                 <hr>
                 </div>`
       }
     })

@@ -7,5 +7,6 @@ FactoryGirl.define do
   factory :link do
     url 'https://github.com'
     title 'Github'
+    read false
   end
 end

@@ -9,7 +9,7 @@ class LinksContainer {
     this.filterABC = this.filterABC.bind(this)
 
     $(document).on('click', '.mark-read', this.toggleReadStatus)
-    $(document).on('keyup', '.link-search', this.filterLinks)
+    $(document).on('keyup', '#link-search', this.filterLinks)
     $(document).on('click', '#filter-read', this.filterRead)
     $(document).on('click', '#filter-unread', this.filterUnread)
     $(document).on('click', '#filter-abc', this.filterABC)

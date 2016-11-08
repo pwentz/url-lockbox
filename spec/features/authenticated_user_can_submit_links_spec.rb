@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Authenticated user can submit links', type: :feature do
+describe 'Authenticated user can submit links', type: :feature, js: true do
   context 'user is authenticated' do
     scenario 'they see a new link form from links#index' do
       authenticated_user = FactoryGirl.create(:user)
@@ -27,10 +27,7 @@ describe 'Authenticated user can submit links', type: :feature do
         expect(current_path).to eq(links_path)
       end
 
-      #Need selenium to pass
-      #
       scenario 'they see the links they created' do
-        pending
         authenticated_user = FactoryGirl.create(:user)
         session_hash = { user_id: authenticated_user.id }
         page.set_rack_session(session_hash)
@@ -89,7 +86,7 @@ describe 'Authenticated user can submit links', type: :feature do
     scenario 'they see a descriptive message' do
       visit links_path
 
-      expect(page).to have_text('You are not authorized to visit this page')
+      expect(page).to have_text('Please sign in or create an account to use this page')
     end
 
     scenario 'they see no links' do

@@ -4,10 +4,10 @@
       - if @link
         = render partial: '/shared/errors', locals: { target: @link }
       = f.label :url
-      = f.text_field :url
+      = f.text_field :url, class: 'new-link-url'
       %br
       = f.label :title
-      = f.text_field :title
+      = f.text_field :title, class: 'new-link-title'
       %br
       = f.submit 'Create link', class: 'button hollow success create-link'
 

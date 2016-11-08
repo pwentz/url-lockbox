@@ -16,6 +16,9 @@ class LinksContainer {
   }
 
   getLinks() {
+    $('.new-link-url').val('')
+    $('.new-link-title').val('')
+
     $.getJSON('/api/v1/links.json')
       .done( data => $('.links').append(this.renderLinks(data)))
   }
@@ -25,14 +28,14 @@ class LinksContainer {
     return data.map(link => {
       if (link.read) {
         return `<div id=${link.id} class='link'>
-                 <a href=${link.url} style='color:red;' class='link-title'>${link.title}</a><p>Read: ${link.read}</p>
+                 <a href=${link.url} style='color:red;' class='link-title' target='_blank'>${link.title}</a><p>Read: ${link.read}</p>
                  <a href='#' class='mark-read'>Mark as Unread</a>
-                 <a href='/links/${link.id}/edit'class='edit-link button warning'>Edit</button>
+                 <a href='/links/${link.id}/edit' class='edit-link button warning'>Edit</button>
                 </div>`
       }
       else {
         return `<div id=${link.id} class='link'>
-                 <a href=${link.url} class='link-title'>${link.title}</a><p>Read: ${link.read}</p>
+                 <a href=${link.url} class='link-title' target='_blank'>${link.title}</a><p>Read: ${link.read}</p>
                  <a href='#' class='mark-read'>Mark as Read</a>
                  <a href='links/${link.id}/edit' class='edit-link button warning'>Edit</button>
                 </div>`
@@ -113,6 +116,14 @@ class LinksContainer {
       url: `/api/v1/links/${id}.json`,
       type: 'PUT',
       data: { read: readStatus }
+    })
+  }
+
+  postLinkRequest(title, url) {
+    $.ajax({
+      url: `/api/v1/links.json`,
+      type: 'POST',
+      data: { link: { title: title, url: url } }
     })
   }
 }

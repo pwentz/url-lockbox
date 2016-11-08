@@ -1,4 +1,6 @@
 class LinksController < ApplicationController
+  before_action :verify_permissions
+
   def index
     @links = current_user.links
     @link = Link.new unless @link
@@ -32,5 +34,9 @@ class LinksController < ApplicationController
 
   def link_params
     params.require(:link).permit(:title, :url)
+  end
+
+  def verify_permissions
+    render file: '/public/unauthorized_access' unless current_user
   end
 end

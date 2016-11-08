@@ -2,13 +2,13 @@ class LinksContainer {
   constructor() {
     this.links = []
     this.getLinks = this.getLinks.bind(this)
-    this.markAsRead = this.markAsRead.bind(this)
+    this.toggleReadStatus = this.toggleReadStatus.bind(this)
     this.filterLinks = this.filterLinks.bind(this)
     this.filterRead = this.filterRead.bind(this)
     this.filterUnread = this.filterUnread.bind(this)
     this.filterABC = this.filterABC.bind(this)
 
-    $(document).on('click', '.mark-read', this.markAsRead)
+    $(document).on('click', '.mark-read', this.toggleReadStatus)
     $(document).on('keyup', '.link-search', this.filterLinks)
     $(document).on('click', '#filter-read', this.filterRead)
     $(document).on('click', '#filter-unread', this.filterUnread)
@@ -43,7 +43,9 @@ class LinksContainer {
     })
   }
 
-  markAsRead(e) {
+  toggleReadStatus(e) {
+    e.preventDefault()
+
     const targetDiv = e.target.closest('div')
     const targetP = $(targetDiv).find('p')
     const targetReadAnchor = $(targetDiv).find('.mark-read')
@@ -78,6 +80,8 @@ class LinksContainer {
   }
 
   filterRead(e) {
+    e.preventDefault()
+
     $('.link').each((index, link) => {
       let $linkDiv = $(link)
       let linkP = $linkDiv.find('p')
@@ -91,6 +95,8 @@ class LinksContainer {
   }
 
   filterUnread(e) {
+    e.preventDefault()
+
     $('.link').each((index, link) => {
       let $linkDiv = $(link)
       let linkP = $linkDiv.find('p')

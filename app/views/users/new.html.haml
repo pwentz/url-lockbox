@@ -1,12 +1,14 @@
-= form_for(@user) do |f|
-  = render partial: '/shared/errors', locals: { target: @user }
-  = f.label :email_address
-  = f.text_field :email_address
-  %br
-  = f.label :password
-  = f.password_field :password
-  %br
-  = f.label :confirm_password
-  = f.password_field :password_confirmation
-  %br
-  = f.submit 'Create account'
+.row
+  .small-4.small-centered.columns
+    = form_for(@user) do |f|
+      = render partial: '/shared/errors', locals: { target: @user }
+      = f.label :email_address
+      = f.text_field :email_address
+      %br
+      = f.label :password
+      = f.password_field :password
+      %br
+      = f.label :confirm_password
+      = f.password_field :password_confirmation
+      %br
+      = f.submit 'Create account', class: 'button hollow'

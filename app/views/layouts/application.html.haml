@@ -15,6 +15,9 @@
     %ul.menu.primary-nav
       - if current_user
         %li= link_to 'Sign out', '/sign_out', method: :delete
+      - else
+        %li= link_to 'Create Account', new_user_path
+        %li= link_to 'Sign in', new_session_path
 
     - flash.each do |type, message|
       = content_tag :div, message, class: "flash_#{type}"

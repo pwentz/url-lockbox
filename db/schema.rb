@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161031175409) do
+ActiveRecord::Schema.define(version: 20161108210831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,8 +18,10 @@ ActiveRecord::Schema.define(version: 20161031175409) do
   create_table "links", force: :cascade do |t|
     t.text    "url"
     t.text    "title"
-    t.boolean "read",    default: false
+    t.boolean "read",       default: false
     t.integer "user_id"
+    t.text    "html_h1"
+    t.text    "html_title"
     t.index ["user_id"], name: "index_links_on_user_id", using: :btree
   end
 

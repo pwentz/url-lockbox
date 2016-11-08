@@ -2,7 +2,6 @@ class LinksController < ApplicationController
   before_action :verify_permissions
 
   def index
-    @links = current_user.links
     @link = Link.new unless @link
   end
 
@@ -10,7 +9,7 @@ class LinksController < ApplicationController
     @link = Link.new(title: params[:link][:title],
                      url: params[:link][:url],
                      user: current_user)
-    if @link
+    if @link.save
       current_user.links << @link
     end
 

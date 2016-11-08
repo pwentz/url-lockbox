@@ -3,7 +3,9 @@ class Api::V1::LinksController < ApplicationController
 
   def index
     if current_user && params[:ordered]
-      respond_with current_user.links.order(:title)
+      ordered_user_links = current_user.links.order(:title)
+
+      respond_with ordered_user_links
     elsif current_user
       respond_with current_user.links
     else

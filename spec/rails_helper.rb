@@ -38,6 +38,13 @@ Shoulda::Matchers.configure do |config|
 end
 
 RSpec.configure do |config|
+
+  config.before(:each) do
+    allow_any_instance_of(Link).to receive(
+      :set_html_values
+    ).and_return(nil)
+  end
+
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.clean_with(:truncation)

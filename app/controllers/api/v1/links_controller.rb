@@ -12,7 +12,11 @@ class Api::V1::LinksController < ApplicationController
   end
 
   def update
-    link = Link.find(params[:id])
-    link.update_attribute(:read, params[:read])
+    if current_user
+      link = Link.find(params[:id])
+      link.update_attribute(:read, params[:read])
+    else
+      render json: {}, status: 400
+    end
   end
 end

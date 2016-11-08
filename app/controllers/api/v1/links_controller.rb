@@ -1,5 +1,4 @@
 class Api::V1::LinksController < ApplicationController
-  skip_before_action :verify_permissions
   respond_to :json
 
   def index

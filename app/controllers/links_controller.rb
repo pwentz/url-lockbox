@@ -5,10 +5,10 @@ class LinksController < ApplicationController
   end
 
   def create
-    @link = Link.create(title: params[:link][:title],
-                       url: params[:link][:url],
-                       user: current_user)
-    if @link.valid?
+    @link = Link.new(title: params[:link][:title],
+                     url: params[:link][:url],
+                     user: current_user)
+    if @link
       current_user.links << @link
     end
 

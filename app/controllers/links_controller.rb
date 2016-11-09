@@ -25,6 +25,7 @@ class LinksController < ApplicationController
     if @link.update(link_params)
       redirect_to links_path
     else
+      # ActiveRecord validation
       render :edit
     end
   end
